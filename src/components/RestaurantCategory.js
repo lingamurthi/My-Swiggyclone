@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 
-const RestaurantCategory=({data,showItems,setShowIndex,a,closeShowIndex})=>{
+const RestaurantCategory=({data,showItems,setShowIndex})=>{
 
     let [count, setCount] = useState(0);
 
@@ -13,15 +13,7 @@ const RestaurantCategory=({data,showItems,setShowIndex,a,closeShowIndex})=>{
    const handleClick=()=>{
    // setShowItems(!showItems)
 
-  if(count%2==0)
-  {
-    setCount(++count)
-    setShowIndex()
-  }
-   else{
-    setCount(++count)
-    closeShowIndex()
-   }
+   setShowIndex(!showItems)
 
     }
 return(

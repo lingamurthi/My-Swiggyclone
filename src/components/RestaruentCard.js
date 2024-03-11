@@ -4,13 +4,14 @@ const RestaruentCard = (props) => {
     const {resData}=props;
 
    // console.log(resData);
-    const {cloudinaryImageId,name,cuisines,avgRating,costForTwo}=resData?.info;
+    const {costForTwo,name,cloudinaryImageId,cuisines,avgRating}=resData?.info;
+ 
 
   
   return (
-    <div data-testid="resCard" className="m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200" >
-      <img
-        className="rounded-lg"
+    <div data-testid="resCard" className="m-4 p-4 w-[250px] h-[500px] rounded-lg bg-gray-100 hover:bg-gray-200" >
+      <img 
+        className="rounded-lg h-[250px]"
         alt="res-logo"
         src={ CDN_URL + cloudinaryImageId}
       />

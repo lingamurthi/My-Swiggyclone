@@ -10,9 +10,9 @@ const cartSlice=createSlice({
             //mutating the state directly
           state.items.push(action.payload)
           //state=[] ----- make changes in local not in global state
-          console.log(state);
-          console.log(current.state);
-          console.log(action.payload);
+         // console.log(state);
+         // console.log(current.state);
+         // console.log(action.payload);
         },
         removeItem:(state)=>{
             state.items.pop()

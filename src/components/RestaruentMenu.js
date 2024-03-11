@@ -10,7 +10,7 @@ import RestaurantCategory from './RestaurantCategory';
 
 
 const RestaruentMenu = () => {
-const [showIndex,setShowIndex]=useState(null)
+const [showIndex,setShowIndex]=useState(0)
   
 
 //console.log(showIndex);
@@ -41,7 +41,7 @@ const categories=resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.fi
         <h1 className='font-bold my-6 text-2xl'>{name}</h1>
         <p className='font-bold text-lg'>{cuisines.join(", ")} - {costForTwoMessage}
         {categories.map((category,index)=>(
-         <RestaurantCategory key={category?.card?.card?.title} data={category?.card?.card} showItems={index===showIndex ? true : false} setShowIndex={()=>{setShowIndex(index);}} a={index} closeShowIndex={()=>{setShowIndex(null)}}/>
+         <RestaurantCategory key={category?.card?.card?.title} data={category?.card?.card} showItems={index===showIndex ? true : false} setShowIndex={()=>{index===showIndex ? setShowIndex(null) :  setShowIndex(index);}}/>
         )
           
         )}
