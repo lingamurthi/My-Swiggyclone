@@ -19,8 +19,6 @@ const [showIndex,setShowIndex]=useState(0)
 
 
 
-
-
    const resInfo= useRestaurantMenu(resId)
 
 if(resInfo===null)

@@ -23,27 +23,30 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://corsproxy.org/?" +
-        encodeURIComponent(
-          "https://www.swiggy.com/dapi/restaurants/list/v5?lat=14.444057&lng=75.908034&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-        )
-    );
+ 
+    const data=await fetch('http://localhost:8000/api/restaurants')
     const json = await data?.json();
     //console.log(json?.data);
 
-
+    const carouseldata=await fetch('http://localhost:8000/api/headercard')
+    const carouseldatajson = await carouseldata?.json();
    
     
    
-    setListOfRestaruents(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    // setListOfRestaruents(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    // );
+
+    setListOfRestaruents(json)
     //console.log(listOfRestaruents);
-    setFilteredRestaruents(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setCarouselheaderdata(
-      json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info
-    );
+    // setFilteredRestaruents(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    // );
+
+    setFilteredRestaruents(json)
+    // setCarouselheaderdata(
+    //   json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info
+    // );
+
+    setCarouselheaderdata(carouseldatajson)
   
   }
   //conditional rendering
@@ -85,7 +88,7 @@ const Body = () => {
             onClick={() => {
               const searchfilteredRestaruentss = listOfRestaruents.filter(
                 (res) =>
-                  res.info.name.toLowerCase().includes(searchTest.toLowerCase())
+                  res.name.toLowerCase().includes(searchTest.toLowerCase())
               );
               setFilteredRestaruents(searchfilteredRestaruentss);
             }}
@@ -99,7 +102,7 @@ const Body = () => {
             onClick={() => {
               // console.log("Before filter"+listOfRestaruents);
               const filteredList = listOfRestaruents.filter((res) => {
-                return res.info.avgRating >= 4.3;
+                return res.avgRating >= 4.3;
               });
               // console.log("After filter"+filteredList);
               setFilteredRestaruents(filteredList);
@@ -112,7 +115,7 @@ const Body = () => {
             className="px-4 py-2 bg-red-500 300 m-4 rounded-lg"
             onClick={() => {
               const fastdelivery = listOfRestaruents.filter((res) => {
-                return res.info.sla.deliveryTime <= 20;
+                return res.sla.deliveryTime <= 25;
               });
               setFilteredRestaruents(fastdelivery);
             }}
@@ -124,7 +127,7 @@ const Body = () => {
             className="px-4 py-2 bg-green-500 300 m-4 rounded-lg"
             onClick={() => {
               const pureVeg = listOfRestaruents.filter((res) => {
-                return res.info.veg;
+                return res.veg;
               });
               setFilteredRestaruents(pureVeg);
             }}
@@ -137,8 +140,8 @@ const Body = () => {
             onClick={() => {
               const pureVeg = listOfRestaruents.filter((res) => {
                 return (
-                  res?.info?.costForTwo.slice(1, 4) >= 300 &&
-                  res?.info?.costForTwo.slice(1, 4) <= 600
+                  res.costForTwo >= 300 &&
+                  res.costForTwo <= 600
                 );
               });
               setFilteredRestaruents(pureVeg);
@@ -150,7 +153,7 @@ const Body = () => {
             className="px-4 py-2 bg-slate-500 300 m-4 rounded-lg"
             onClick={() => {
               const pureVeg = listOfRestaruents.filter((res) => {
-                return res?.info?.costForTwo.slice(1, 4) <= 300;
+                return res.costForTwo <= 300;
               });
               setFilteredRestaruents(pureVeg);
             }}
@@ -173,8 +176,8 @@ const Body = () => {
         {filteredRestaruents &&
           filteredRestaruents.map((restaurent) => (
             <Link
-              key={restaurent?.info?.id}
-              to={"/restaurants/" + restaurent?.info?.id}
+              key={restaurent?._id}
+              to={"/restaurants/" + restaurent.id}
             >
               <RestaruentCard resData={restaurent} />
             </Link>
