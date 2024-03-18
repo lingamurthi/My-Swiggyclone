@@ -24,11 +24,11 @@ const Body = () => {
 
   const fetchData = async () => {
  
-    const data=await fetch('http://localhost:8000/api/restaurants')
+    const data=await fetch('https://my-swiggybackend-1.onrender.com/api/restaurants')
     const json = await data?.json();
     //console.log(json?.data);
 
-    const carouseldata=await fetch('http://localhost:8000/api/headercard')
+    const carouseldata=await fetch('https://my-swiggybackend-1.onrender.com/api/headercard')
     const carouseldatajson = await carouseldata?.json();
    
     
