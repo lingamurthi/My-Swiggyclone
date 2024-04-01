@@ -8,7 +8,7 @@ const app = express();
 app.use(
   '/restaurants',
   createProxyMiddleware({
-    target: 'http://localhost:8000',
+    target: 'https://my-swiggybackend.onrender.com/',
     changeOrigin: true,
     pathRewrite: {
       '^/restaurants': '/api/restaurantsmenu'
@@ -22,5 +22,5 @@ app.use(express.static('dist'));
 // Start the server
 const port = process.env.PORT || 1234;
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://https://my-swiggybackend.onrender.com:${port}`);
 });
